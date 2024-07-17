@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/style.css">
+    <title>Card</title>
+</head>
+<body>
+    <div id="panel" class="hide">
+        <button id="close" onclick="showClosePanel()">
+            <span class="material-symbols-outlined">disabled_by_default</span>
+        </button>
+        <div id="options">
+            <button class="option select-option" onclick="option(this)">
+                <img src="cards/club.png" alt="clubs" width="15">
+            </button>
+            <button class="option" onclick="option(this)">
+                <img src="cards/diamond.png" alt="diamonds" width="15">
+            </button>
+            <button class="option" onclick="option(this)">
+                <img src="cards/heart.png" alt="hearts" width="15">
+            </button>
+            <button class="option" onclick="option(this)">
+                <img src="cards/spade.png" alt="spades" width="15">
+            </button>
+        </div>
+        <div id="panel-content"></div>
+    </div>
+    <div id="table"></div>
+    <div id="holder"></div>
+    <script src="src/script.js"></script>
+</body>
+</html>
