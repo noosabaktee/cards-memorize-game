@@ -2,6 +2,10 @@
 // 2 = diamonds
 // 3 = hearts
 // 4 = spades
+
+if (localStorage.getItem("level") == null) localStorage.setItem("level","easy")
+if (localStorage.getItem("score") == null) localStorage.setItem("score",0)
+
 let list = []
 const table = document.getElementById("table")
 const holder = document.getElementById("holder")
@@ -23,16 +27,34 @@ for(let i=1;i<=13;i++){
     }
 }
 
-const cards = sampleSize(list,15)
-let card_el = ""
-const card_holder = {}
+let cards
+let card_holder = {}
 
-cards.forEach((i,index) => {
-    card_holder[index+1] = "-"
-    card_el += `<img class="card animate__animated" src="cards/back.png" id="card-el-${i}"/>`
-})
+let updateTable = () => {
+    table.classList.toggle('animate__bounceInDown')
+    let new_element = ""
+    const level = localStorage.getItem("level")
+    document.getElementById("level").value = level
+    if(level == "easy")  cards = sampleSize(list,20)
+    else if(level == "medium")  cards = sampleSize(list,35)
+    else if(level == "hard")  cards = sampleSize(list,52)
+    cards.forEach((i,index) => {
+        card_holder[index+1] = "-"
+        new_element += `<img class="card animate__animated" src="cards/back.png" id="card-el-${i}"/>`
+    })
+    table.innerHTML = new_element    
+}
+updateTable()
 
-table.innerHTML = card_el
+let updateLevel = (el) => {
+    deleteAnim()
+    localStorage.setItem("level",el.value)
+    table.classList.toggle('animate__bounceOutUp')
+    setTimeout(function(){
+        table.classList.toggle('animate__bounceOutUp')
+        updateTable()
+    }, 1000);
+}
 
 const updateHold = () => {
     let card_holder_el = ""
@@ -46,7 +68,6 @@ const updateHold = () => {
     }
     holder.innerHTML = card_holder_el
 }
-updateHold()
 
 let updatePanel = (option) => {
     // update untuk panel 
@@ -65,6 +86,9 @@ let updatePanel = (option) => {
 
 const showClosePanel = () => {
     document.getElementById('panel').classList.toggle('hide')
+}
+const showClosePopup = () => {
+    document.getElementById('popup').classList.toggle('hide')
 }
 
 const selectCard = (i) => {
@@ -102,17 +126,22 @@ let option = (el) => {
 }
 
 let flipCard = (i) => {
-    if(i > cards.length-1) return false
+    if(i > cards.length-1) {
+        updateHold()
+        return false
+    }
     const cardOpen = document.getElementsByClassName('card')[i]
     cardOpen.classList.toggle('animate__flipInY')
     cardOpen.src = `cards/${cards[i]}.svg`
     setTimeout(function(){
         flipCard(i+1)
-    }, 200);
+    }, 100);
 }
 
 let checkCard = (i) => {
-    if(i > cards.length-1) return false
+    if(i > cards.length-1){
+        return false
+    }
     let answer = cards[i] == card_holder[i+1] ? "correct" : "wrong"
     const cardOpen = document.getElementById(`card-hold-${i+1}`)
     if(answer == "wrong") cardOpen.classList.toggle('animate__tada')
@@ -120,20 +149,34 @@ let checkCard = (i) => {
     cardOpen.classList.toggle(answer)
     setTimeout(function(){
         checkCard(i+1)
-    }, 1000);
+    }, 100);
 }
 
 let start = () => {
+    showClosePopup()
     flipCard(0)
 }
 
 let startHold = () => {
-    table.classList.toggle('animate__bounceInDown')
-    table.classList.toggle('animate__backOutUp')
+    deleteAnim()
+    table.classList.toggle('animate__bounceOutUp')
     setTimeout(function(){
         table.classList.toggle('hide')
         holder.classList.toggle('hide')
         holder.classList.toggle('animate__bounceInDown')
+    }, 1000);
+}
+
+let restart = () => {
+    cards = []
+    card_holder = {}
+    holder.classList.toggle('animate__bounceOutUp')
+    setTimeout(function(){
+        showClosePopup()
+        holder.classList.toggle('hide')
+        table.classList.toggle('hide')
+        deleteAnim()
+        updateTable()
     }, 1000);
 }
 
@@ -142,4 +185,11 @@ let submit = () => {
         console.log("masih ada yang kosong")
     }
     checkCard(0)
+}
+
+let deleteAnim = () => {
+    table.classList.remove('animate__bounceOutUp')
+    table.classList.remove('animate__bounceInDown')
+    holder.classList.remove('animate__bounceOutUp')
+    holder.classList.remove('animate__bounceInDown')    
 }

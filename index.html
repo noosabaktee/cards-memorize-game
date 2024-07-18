@@ -29,18 +29,23 @@
         <div id="panel-content"></div>
     </div>
     <div id="popup">
-        <button class="close" onclick="showClosepopup()">
+        <button class="close" onclick="showClosePopup()">
             <span class="material-symbols-outlined">disabled_by_default</span>
         </button>
         <div id="popup-content">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis amet quibusdam necessitatibus laborum? Laudantium fugiat illo placeat sit fugit eius consequatur facilis. Beatae temporibus a obcaecati nostrum et, sunt magnam.
+            <select id="level" name="level" onchange="updateLevel(this)">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+            <button onclick="start()">start</button>
         </div>
     </div>
-    <button onclick="start()">start</button>
-    <div id="table" class="animate__animated animate__bounceInDown"></div>
+    <div id="table" class="animate__animated"></div>
     <button onclick="startHold()">next</button>
     <div id="holder" class="animate__animated hide"></div>
     <button onclick="submit()">submit</button>
+    <button onclick="restart()">restart</button>
     <script src="src/script.js"></script>
 </body>
 </html>
