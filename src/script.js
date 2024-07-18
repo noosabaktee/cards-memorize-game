@@ -29,8 +29,9 @@ const card_holder = {}
 
 cards.forEach((i,index) => {
     card_holder[index+1] = "-"
-    card_el += `<img class="card" src="cards/back.png" id="card-el-${i}"/>`
+    card_el += `<img class="card animate__animated" src="cards/back.png" id="card-el-${i}"/>`
 })
+
 table.innerHTML = card_el
 
 const updateHold = () => {
@@ -100,4 +101,26 @@ let option = (el) => {
     updatePanel(option)
 }
 
+let flipCard = (i) => {
+    if(i > cards.length-1) return false
+    const cardOpen = document.getElementsByClassName('card')[i]
+    cardOpen.classList.toggle('animate__flipInY')
+    cardOpen.src = `cards/${cards[i]}.svg`
+    console.log("HELLO");
+    setTimeout(function(){
+        flipCard(i+1)
+    }, 200);
+}
 
+let start = () => {
+    flipCard(0)
+}
+
+let submit = () => {
+    if(Object.values(card_holder).includes("-")){
+        console.log("masih ada yang kosong")
+    }
+    for(let i=0;i<cards.length;i++){
+        console.log(i)
+    }
+}
