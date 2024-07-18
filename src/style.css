@@ -33,7 +33,7 @@
     transform: translate(-50%, -50%);
 }
 
-#panel{
+#panel, #popup{
     margin: 0;
     width: 80%;
     position: absolute;
@@ -41,13 +41,13 @@
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    background-color: #bdb3db;
+    background-color: white;
     border-radius: 10px;
     border: 2px solid black;
     z-index: 100;
 }
 
-#close{
+.close{
     position: absolute;
     right: -10px;
     top: -10px;
@@ -71,7 +71,7 @@
     background-color: #bdb3db;
 }
 
-#panel-content{
+#panel-content,#popup-content{
     max-height: 70vh;
     padding: 15px;
     max-width: 80vw;
@@ -81,4 +81,14 @@
 
 .disabled{
     opacity: 50%;
+}
+
+.wrong{
+    border: 2px solid red;
+    border-radius: 10px;
+}
+
+.correct{
+    border: 2px solid green;
+    border-radius: 10px;
 }

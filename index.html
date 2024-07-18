@@ -9,7 +9,7 @@
 </head>
 <body>
     <div id="panel" class="hide">
-        <button id="close" onclick="showClosePanel()">
+        <button class="close" onclick="showClosePanel()">
             <span class="material-symbols-outlined">disabled_by_default</span>
         </button>
         <div id="options">
@@ -28,9 +28,18 @@
         </div>
         <div id="panel-content"></div>
     </div>
-    <div id="table"></div>
+    <div id="popup">
+        <button class="close" onclick="showClosepopup()">
+            <span class="material-symbols-outlined">disabled_by_default</span>
+        </button>
+        <div id="popup-content">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis amet quibusdam necessitatibus laborum? Laudantium fugiat illo placeat sit fugit eius consequatur facilis. Beatae temporibus a obcaecati nostrum et, sunt magnam.
+        </div>
+    </div>
     <button onclick="start()">start</button>
-    <div id="holder"></div>
+    <div id="table" class="animate__animated animate__bounceInDown"></div>
+    <button onclick="startHold()">next</button>
+    <div id="holder" class="animate__animated hide"></div>
     <button onclick="submit()">submit</button>
     <script src="src/script.js"></script>
 </body>

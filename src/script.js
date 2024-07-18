@@ -39,8 +39,8 @@ const updateHold = () => {
     // update untuk card holder
     for (const [key, value] of Object.entries(card_holder)) {
         let src = value == "-" ? "card-base.png" : `${value}.svg`
-        card_holder_el += `<div class="card-hold" id="card-hold-${key}" onclick="selectCard(${key})" >
-            <img src="cards/${src}" disabled/>
+        card_holder_el += `<div class="card-hold" onclick="selectCard(${key})" >
+            <img class="animate__animated" id="card-hold-${key}"  src="cards/${src}" disabled/>
             <span>${key}</span>
         </div>`
     }
@@ -106,21 +106,40 @@ let flipCard = (i) => {
     const cardOpen = document.getElementsByClassName('card')[i]
     cardOpen.classList.toggle('animate__flipInY')
     cardOpen.src = `cards/${cards[i]}.svg`
-    console.log("HELLO");
     setTimeout(function(){
         flipCard(i+1)
     }, 200);
+}
+
+let checkCard = (i) => {
+    if(i > cards.length-1) return false
+    let answer = cards[i] == card_holder[i+1] ? "correct" : "wrong"
+    const cardOpen = document.getElementById(`card-hold-${i+1}`)
+    if(answer == "wrong") cardOpen.classList.toggle('animate__tada')
+    else cardOpen.classList.toggle('animate__bounce')
+    cardOpen.classList.toggle(answer)
+    setTimeout(function(){
+        checkCard(i+1)
+    }, 1000);
 }
 
 let start = () => {
     flipCard(0)
 }
 
+let startHold = () => {
+    table.classList.toggle('animate__bounceInDown')
+    table.classList.toggle('animate__backOutUp')
+    setTimeout(function(){
+        table.classList.toggle('hide')
+        holder.classList.toggle('hide')
+        holder.classList.toggle('animate__bounceInDown')
+    }, 1000);
+}
+
 let submit = () => {
     if(Object.values(card_holder).includes("-")){
         console.log("masih ada yang kosong")
     }
-    for(let i=0;i<cards.length;i++){
-        console.log(i)
-    }
+    checkCard(0)
 }
