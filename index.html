@@ -8,44 +8,51 @@
     <title>Card</title>
 </head>
 <body>
-    <div id="panel" class="hide">
-        <button class="close" onclick="showClosePanel()">
-            <span class="material-symbols-outlined">disabled_by_default</span>
-        </button>
-        <div id="options">
-            <button class="option select-option" onclick="option(this)">
-                <img src="cards/club.png" alt="clubs" width="15">
-            </button>
-            <button class="option" onclick="option(this)">
-                <img src="cards/diamond.png" alt="diamonds" width="15">
-            </button>
-            <button class="option" onclick="option(this)">
-                <img src="cards/heart.png" alt="hearts" width="15">
-            </button>
-            <button class="option" onclick="option(this)">
-                <img src="cards/spade.png" alt="spades" width="15">
-            </button>
+    <div id="content">
+        <div id="timer">
+            <span id="minutes">00</span>:
+            <span id="seconds">00</span>
         </div>
-        <div id="panel-content"></div>
-    </div>
-    <div id="popup">
-        <button class="close" onclick="showClosePopup()">
-            <span class="material-symbols-outlined">disabled_by_default</span>
-        </button>
-        <div id="popup-content">
-            <select id="level" name="level" onchange="updateLevel(this)">
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
-            </select>
-            <button onclick="start()">start</button>
+        <button id="playBtn" onclick="showClosePopup()">play</button>
+        <div id="panel" class="hide">
+            <button class="close" onclick="showClosePanel()">
+                <span class="material-symbols-outlined">disabled_by_default</span>
+            </button>
+            <div id="options">
+                <button class="option select-option" onclick="option(this)">
+                    <img src="cards/club.png" alt="clubs" width="15">
+                </button>
+                <button class="option" onclick="option(this)">
+                    <img src="cards/diamond.png" alt="diamonds" width="15">
+                </button>
+                <button class="option" onclick="option(this)">
+                    <img src="cards/heart.png" alt="hearts" width="15">
+                </button>
+                <button class="option" onclick="option(this)">
+                    <img src="cards/spade.png" alt="spades" width="15">
+                </button>
+            </div>
+            <div id="panel-content"></div>
         </div>
+        <div id="popup">
+            <button class="close" onclick="showClosePopup()">
+                <span class="material-symbols-outlined">disabled_by_default</span>
+            </button>
+            <div id="popup-content">
+                <select id="level" name="level" onchange="updateLevel(this)">
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+                <button onclick="start()">start</button>
+            </div>
+        </div>
+        <div id="table" class="animate__animated"></div>
+        <button id="nextBtn" onclick="startHold()" class="hide">next</button>
+        <div id="holder" class="animate__animated hide"></div>
+        <button id="submitBtn" onclick="submit()" class="hide">submit</button>
+        <button id="restartBtn" onclick="restart()" class="hide">restart</button>
     </div>
-    <div id="table" class="animate__animated"></div>
-    <button onclick="startHold()">next</button>
-    <div id="holder" class="animate__animated hide"></div>
-    <button onclick="submit()">submit</button>
-    <button onclick="restart()">restart</button>
     <script src="src/script.js"></script>
 </body>
 </html>

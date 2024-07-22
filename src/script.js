@@ -3,14 +3,20 @@
 // 3 = hearts
 // 4 = spades
 
-if (localStorage.getItem("level") == null) localStorage.setItem("level","easy")
 if (localStorage.getItem("score") == null) localStorage.setItem("score",0)
 
 let list = []
 const table = document.getElementById("table")
 const holder = document.getElementById("holder")
 const panel_content = document.getElementById("panel-content")
+const nextBtn = document.getElementById("nextBtn")
+const playBtn = document.getElementById("playBtn")
+const submitBtn = document.getElementById("submitBtn")
+const restartBtn = document.getElementById("restartBtn")
 let hold = 0 // kartu urutan berapa yang mau diisi
+let minutes = 0
+let seconds = 10
+let timerMemorize, timerHold
 
 const sampleSize = ([...arr], n = 1) => {
     let m = arr.length;
@@ -31,13 +37,13 @@ let cards
 let card_holder = {}
 
 let updateTable = () => {
+    card_holder = {}
     table.classList.toggle('animate__bounceInDown')
     let new_element = ""
-    const level = localStorage.getItem("level")
-    document.getElementById("level").value = level
-    if(level == "easy")  cards = sampleSize(list,20)
-    else if(level == "medium")  cards = sampleSize(list,35)
-    else if(level == "hard")  cards = sampleSize(list,52)
+    let level = document.getElementById("level").value
+    if(level == "easy") cards = sampleSize(list,20)
+    if(level == "medium") cards = sampleSize(list,35)
+    if(level == "hard") cards = sampleSize(list,52)
     cards.forEach((i,index) => {
         card_holder[index+1] = "-"
         new_element += `<img class="card animate__animated" src="cards/back.png" id="card-el-${i}"/>`
@@ -46,9 +52,8 @@ let updateTable = () => {
 }
 updateTable()
 
-let updateLevel = (el) => {
+let updateLevel = () => {
     deleteAnim()
-    localStorage.setItem("level",el.value)
     table.classList.toggle('animate__bounceOutUp')
     setTimeout(function(){
         table.classList.toggle('animate__bounceOutUp')
@@ -153,11 +158,22 @@ let checkCard = (i) => {
 }
 
 let start = () => {
+    playBtn.classList.toggle("hide")
+    timerMemorize = setInterval(() => {
+        countDown("memorize")
+    }, 1000)
+    nextBtn.classList.toggle("hide")
     showClosePopup()
     flipCard(0)
 }
 
 let startHold = () => {
+    clearAllInterval()
+    timerHold = setInterval(() => {
+        countDown("hold")
+    }, 1000)
+    nextBtn.classList.toggle("hide")
+    submitBtn.classList.toggle("hide")
     deleteAnim()
     table.classList.toggle('animate__bounceOutUp')
     setTimeout(function(){
@@ -168,6 +184,8 @@ let startHold = () => {
 }
 
 let restart = () => {
+    playBtn.classList.toggle("hide")
+    restartBtn.classList.toggle("hide")
     cards = []
     card_holder = {}
     holder.classList.toggle('animate__bounceOutUp')
@@ -181,6 +199,8 @@ let restart = () => {
 }
 
 let submit = () => {
+    submitBtn.classList.toggle("hide")
+    restartBtn.classList.toggle("hide")
     if(Object.values(card_holder).includes("-")){
         console.log("masih ada yang kosong")
     }
@@ -192,4 +212,28 @@ let deleteAnim = () => {
     table.classList.remove('animate__bounceInDown')
     holder.classList.remove('animate__bounceOutUp')
     holder.classList.remove('animate__bounceInDown')    
+}
+
+let countDown = (info) => {
+    seconds--
+    if(seconds < 0){
+        minutes--
+        seconds = 10
+    }
+    document.getElementById("minutes").innerHTML = minutes.toString().length > 1 ? minutes : "0" + minutes
+    document.getElementById("seconds").innerHTML = seconds.toString().length > 1 ? seconds : "0" + seconds
+    if(minutes <= 0 && seconds <= 0){
+        clearAllInterval()
+        if(info == "memorize"){
+            startHold()
+        }else{
+            submit()
+        }
+    }
+}
+
+let clearAllInterval = () => {
+    seconds = 10
+    clearInterval(timerMemorize)
+    clearInterval(timerHold)
 }
