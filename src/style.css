@@ -1,3 +1,37 @@
+*{
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+  
+
+.btn{
+    border: none;
+    padding: 8px 14px;
+    background-color: #198754;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.full{
+    width: 100%;
+}
+
+.close{
+    background-color: transparent;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+}
+
+.material-symbols-outlined{
+    background-color: white;
+}
+
 .card{
     width: 10%;
     margin: 5px 10px;
@@ -48,7 +82,12 @@
 }
 
 #popup{
-    width: auto;
+    max-width: 200px;
+}
+
+select{
+    width: 100%;
+    margin-top: 5px;
 }
 
 .close{

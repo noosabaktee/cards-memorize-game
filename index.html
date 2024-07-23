@@ -3,17 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="src/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/style.css">
     <title>Card</title>
 </head>
 <body>
     <div id="content">
-        <div id="timer">
-            <span id="minutes">00</span>:
-            <span id="seconds">00</span>
+        <div>
+            <div id="timer" style="float: left;">
+                <span id="minutes">00</span>:
+                <span id="seconds">00</span>
+            </div>
+            <button id="playBtn" class="btn" onclick="showClosePopup()" style="float: right;">play</button>
         </div>
-        <button id="playBtn" onclick="showClosePopup()">play</button>
         <div id="panel" class="hide">
             <button class="close" onclick="showClosePanel()">
                 <span class="material-symbols-outlined">disabled_by_default</span>
@@ -39,19 +45,22 @@
                 <span class="material-symbols-outlined">disabled_by_default</span>
             </button>
             <div id="popup-content">
+                <label for="level">Level:</label>
                 <select id="level" name="level" onchange="updateLevel(this)">
                     <option value="easy">Easy</option>
                     <option value="medium">Medium</option>
                     <option value="hard">Hard</option>
                 </select>
-                <button onclick="start()">start</button>
+                <button onclick="start()" class="btn full">start</button>
             </div>
         </div>
-        <div id="table" class="animate__animated"></div>
-        <button id="nextBtn" onclick="startHold()" class="hide">next</button>
-        <div id="holder" class="animate__animated hide"></div>
-        <button id="submitBtn" onclick="submit()" class="hide">submit</button>
-        <button id="restartBtn" onclick="restart()" class="hide">restart</button>
+        <div style="clear: both;">
+            <div id="table" class="animate__animated"></div>
+            <button id="nextBtn" onclick="startHold()" class="hide btn full">next</button>
+            <div id="holder" class="animate__animated hide"></div>
+            <button id="submitBtn" onclick="submit()" class="hide btn full">submit</button>
+            <button id="restartBtn" onclick="restart()" class="hide btn full">restart</button>
+        </div>
     </div>
     <script src="src/script.js"></script>
 </body>
