@@ -14,8 +14,9 @@ const playBtn = document.getElementById("playBtn")
 const submitBtn = document.getElementById("submitBtn")
 const restartBtn = document.getElementById("restartBtn")
 let hold = 0 // kartu urutan berapa yang mau diisi
-let minutes = 0
-let seconds = 10
+let minutes = 59
+let seconds = 60
+let option_select = 1
 let timerMemorize, timerHold
 
 const sampleSize = ([...arr], n = 1) => {
@@ -66,9 +67,10 @@ const updateHold = () => {
     // update untuk card holder
     for (const [key, value] of Object.entries(card_holder)) {
         let src = value == "-" ? "card-base.png" : `${value}.svg`
+        let text = value == "-" ? key : ""
         card_holder_el += `<div class="card-hold" onclick="selectCard(${key})" >
             <img class="animate__animated" id="card-hold-${key}"  src="cards/${src}" disabled/>
-            <span>${key}</span>
+            <span>${text}</span>
         </div>`
     }
     holder.innerHTML = card_holder_el
@@ -100,13 +102,13 @@ const selectCard = (i) => {
     // memilih kartu urutan berapa yang mau diisii
     hold = i // ganti urutan kartu yang mau diisi
     showClosePanel()
-    // kembalikan option ke awal (club)
-    let el = document.getElementsByClassName('option')[0]
-    let last_select = document.getElementsByClassName('select-option')[0]
-    last_select.classList.toggle('select-option')
-    el.classList.toggle("select-option");
+    // // kembalikan option ke awal (club)
+    // let el = document.getElementsByClassName('option')[0]
+    // let last_select = document.getElementsByClassName('select-option')[0]
+    // last_select.classList.toggle('select-option')
+    // el.classList.toggle("select-option");
     // update isi panel
-    updatePanel(1)
+    updatePanel(option_select)
 }
 
 const holdCard = (i) => {
@@ -116,18 +118,24 @@ const holdCard = (i) => {
     updateHold()
     // update isi panel
     updatePanel(i.split("_")[1])
+    // close panel
+    showClosePanel()
+    // jika sudah penuh tombol submit dapat ditekan
+    if(!Object.values(card_holder).includes("-")){
+        submitBtn.disabled = false
+    }
 }
 
 let option = (el) => {
     let last_select = document.getElementsByClassName('select-option')[0]
     last_select.classList.toggle('select-option')
     el.classList.toggle("select-option");
-    let option = el.children[0].getAttribute('alt')
-    if(option == "clubs") option = 1
-    if(option == "diamonds") option = 2
-    if(option == "hearts") option = 3
-    if(option == "spades") option = 4
-    updatePanel(option)
+    option_select = el.children[0].getAttribute('alt')
+    if(option_select == "clubs") option_select = 1
+    if(option_select == "diamonds") option_select = 2
+    if(option_select == "hearts") option_select = 3
+    if(option_select == "spades") option_select = 4
+    updatePanel(option_select)
 }
 
 let flipCard = (i) => {
@@ -201,9 +209,6 @@ let restart = () => {
 let submit = () => {
     submitBtn.classList.toggle("hide")
     restartBtn.classList.toggle("hide")
-    if(Object.values(card_holder).includes("-")){
-        console.log("masih ada yang kosong")
-    }
     checkCard(0)
 }
 
@@ -218,7 +223,7 @@ let countDown = (info) => {
     seconds--
     if(seconds < 0){
         minutes--
-        seconds = 10
+        seconds = 60
     }
     document.getElementById("minutes").innerHTML = minutes.toString().length > 1 ? minutes : "0" + minutes
     document.getElementById("seconds").innerHTML = seconds.toString().length > 1 ? seconds : "0" + seconds
@@ -227,13 +232,14 @@ let countDown = (info) => {
         if(info == "memorize"){
             startHold()
         }else{
+            if(!Array.from(document.getElementById('panel').classList).includes('hide')) showClosePanel()
             submit()
         }
     }
 }
 
 let clearAllInterval = () => {
-    seconds = 10
+    seconds = 60
     clearInterval(timerMemorize)
     clearInterval(timerHold)
 }

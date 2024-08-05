@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="Memorize game using cards">
+    <meta name="keywords" content="HTML, CSS, JavaScript,Game. Cards, Memorize">
+    <meta name="author" content="Rama Nusa Bakti">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -9,16 +12,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="src/style.css">
-    <title>Card</title>
+    <link rel="icon" type="image/x-icon" href="cards\1_1.svg">
+    <title>Cards Memorize</title>
 </head>
 <body>
     <div id="content">
-        <div>
-            <div id="timer" style="float: left;">
+        <h1 style="font-weight: bold;">Cards Memorize</h1>
+        <div style="margin-bottom: 10px;">
+            <button id="playBtn" class="btn" onclick="showClosePopup()" style="float: right;margin-top: -10px;">play</button>
+            <div id="timer">
                 <span id="minutes">00</span>:
                 <span id="seconds">00</span>
             </div>
-            <button id="playBtn" class="btn" onclick="showClosePopup()" style="float: right;">play</button>
         </div>
         <div id="panel" class="hide">
             <button class="close" onclick="showClosePanel()">
@@ -40,12 +45,12 @@
             </div>
             <div id="panel-content"></div>
         </div>
-        <div id="popup">
+        <div id="popup" class="hide">
             <button class="close" onclick="showClosePopup()">
                 <span class="material-symbols-outlined">disabled_by_default</span>
             </button>
             <div id="popup-content">
-                <label for="level">Level:</label>
+                <label for="level" style="font-size: 16px;font-weight: bold;">Level:</label>
                 <select id="level" name="level" onchange="updateLevel(this)">
                     <option value="easy">Easy</option>
                     <option value="medium">Medium</option>
@@ -58,9 +63,12 @@
             <div id="table" class="animate__animated"></div>
             <button id="nextBtn" onclick="startHold()" class="hide btn full">next</button>
             <div id="holder" class="animate__animated hide"></div>
-            <button id="submitBtn" onclick="submit()" class="hide btn full">submit</button>
+            <button id="submitBtn" onclick="submit()" class="hide btn full" disabled>submit</button>
             <button id="restartBtn" onclick="restart()" class="hide btn full">restart</button>
         </div>
+    </div>
+    <div style="margin: 20px auto;width: fit-content;">
+        Made with ❤️ by <a href="https://instagram.com/noosabaktee" target="_blank" style="text-decoration: none;font-weight: bold;">Rama Nusa Bakti</a>
     </div>
     <script src="src/script.js"></script>
 </body>

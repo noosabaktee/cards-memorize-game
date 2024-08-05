@@ -3,7 +3,27 @@
     font-weight: 400;
     font-style: normal;
 }
-  
+
+#content{
+    width: 80%;
+    margin: 0 auto;
+}
+
+h1{
+    text-align: center;
+}
+
+#timer{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+select{
+    height: 35px;
+    border: 2px solid black;
+    border-radius: 5px;
+    font-size: 16px;
+}
 
 .btn{
     border: none;
@@ -16,6 +36,11 @@
     margin-top: 10px;
     font-size: 16px;
 }
+
+.btn:disabled {
+    opacity: 80%;
+}
+
 
 .full{
     width: 100%;
@@ -33,7 +58,7 @@
 }
 
 .card{
-    width: 10%;
+    width: 90px;
     margin: 5px 10px;
 }
 
@@ -48,7 +73,7 @@
 .card-hold, .panel-card{
     display: inline-block;
     margin: 5px 10px;
-    width: 10%;
+    width: 90px;
     position: relative;
     cursor: pointer;
     text-align: center;
@@ -82,7 +107,7 @@
 }
 
 #popup{
-    max-width: 200px;
+    max-width: 300px;
 }
 
 select{
@@ -134,4 +159,10 @@ select{
 .correct{
     border: 2px solid green;
     border-radius: 10px;
+}
+
+@media only screen and (max-width: 500px) {
+    .card, .card-hold, .panel-card{
+        width: 50px;
+    }
 }
