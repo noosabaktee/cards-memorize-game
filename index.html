@@ -23,6 +23,7 @@
             <div id="timer">
                 <span id="minutes">00</span>:
                 <span id="seconds">00</span>
+                <span id="playInfo" onclick="showCloseInfo()" style="cursor: pointer;">📋</span>
             </div>
         </div>
         <div id="panel" class="hide">
@@ -59,12 +60,27 @@
                 <button onclick="start()" class="btn full">start</button>
             </div>
         </div>
+        <div id="info" class="hide">
+            <button class="close" onclick="showCloseInfo()">
+                <span class="material-symbols-outlined">disabled_by_default</span>
+            </button>
+            <div id="info-content">
+                <h3 style="text-align: center;font-weight: bold;">How to play</h3>
+                <ol>
+                    <li>There are 3 phases to this challenge. Memorize, Recall and Examine</li>
+                    <li>In the Memorize phase, users will be given 30 minutes to remember the cards displayed on the screen in the correct order.</li>
+                    <li>At the Recall stage, users will be invited to arrange the cards into the card holder and will only be given 15 minutes</li>
+                    <li>At the final stage Examine, the cards that have been arranged into the card holder will be proven</li>
+                    <li>In the Memorize and Recall phase the user can press a button to move to the next phase even though the time has not yet run out</li>
+                </ol>
+            </div>
+        </div>
         <div style="clear: both;">
             <div id="table" class="animate__animated"></div>
-            <button id="nextBtn" onclick="startHold()" class="hide btn full">next</button>
+            <button id="nextBtn" onclick="startHold()" class="hide btn full" disabled>next</button>
             <div id="holder" class="animate__animated hide"></div>
             <button id="submitBtn" onclick="submit()" class="hide btn full" disabled>submit</button>
-            <button id="restartBtn" onclick="restart()" class="hide btn full">restart</button>
+            <button id="restartBtn" onclick="restart()" class="hide btn full" disabled>restart</button>
         </div>
     </div>
     <div style="margin: 20px auto;width: fit-content;">

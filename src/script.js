@@ -14,7 +14,7 @@ const playBtn = document.getElementById("playBtn")
 const submitBtn = document.getElementById("submitBtn")
 const restartBtn = document.getElementById("restartBtn")
 let hold = 0 // kartu urutan berapa yang mau diisi
-let minutes = 59
+let minutes = 29
 let seconds = 60
 let option_select = 1
 let timerMemorize, timerHold
@@ -97,6 +97,9 @@ const showClosePanel = () => {
 const showClosePopup = () => {
     document.getElementById('popup').classList.toggle('hide')
 }
+const showCloseInfo = () => {
+    document.getElementById('info').classList.toggle('hide')
+}
 
 const selectCard = (i) => {
     // memilih kartu urutan berapa yang mau diisii
@@ -141,6 +144,7 @@ let option = (el) => {
 let flipCard = (i) => {
     if(i > cards.length-1) {
         updateHold()
+        nextBtn.disabled = false
         return false
     }
     const cardOpen = document.getElementsByClassName('card')[i]
@@ -153,6 +157,7 @@ let flipCard = (i) => {
 
 let checkCard = (i) => {
     if(i > cards.length-1){
+        restartBtn.disabled = false
         return false
     }
     let answer = cards[i] == card_holder[i+1] ? "correct" : "wrong"
@@ -176,6 +181,7 @@ let start = () => {
 }
 
 let startHold = () => {
+    minutes = 14
     clearAllInterval()
     timerHold = setInterval(() => {
         countDown("hold")
@@ -192,6 +198,7 @@ let startHold = () => {
 }
 
 let restart = () => {
+    minutes = 29
     playBtn.classList.toggle("hide")
     restartBtn.classList.toggle("hide")
     cards = []
@@ -207,6 +214,7 @@ let restart = () => {
 }
 
 let submit = () => {
+    clearAllInterval()
     submitBtn.classList.toggle("hide")
     restartBtn.classList.toggle("hide")
     checkCard(0)

@@ -58,8 +58,16 @@ select{
 }
 
 .card{
-    width: 90px;
+    width: 9%;
     margin: 5px 10px;
+}
+.card-hold, .panel-card{
+    display: inline-block;
+    margin: 5px 10px;
+    width: 9%;
+    position: relative;
+    cursor: pointer;
+    text-align: center;
 }
 
 .card-hold img, .panel-card img{
@@ -70,14 +78,6 @@ select{
     display: none;
 }
 
-.card-hold, .panel-card{
-    display: inline-block;
-    margin: 5px 10px;
-    width: 90px;
-    position: relative;
-    cursor: pointer;
-    text-align: center;
-}
 
 .panel-card{
     margin: 5px;
@@ -92,10 +92,10 @@ select{
     transform: translate(-50%, -50%);
 }
 
-#panel, #popup{
+#panel, #popup, #info{
     margin: 0;
     width: 80%;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
@@ -109,6 +109,11 @@ select{
 #popup{
     max-width: 300px;
 }
+
+#info{
+    max-width: 500px;
+}
+
 
 select{
     width: 100%;
@@ -139,7 +144,7 @@ select{
     background-color: #bdb3db;
 }
 
-#panel-content,#popup-content{
+#panel-content,#popup-content,#info-content{
     max-height: 70vh;
     padding: 15px;
     max-width: 80vw;
@@ -163,6 +168,10 @@ select{
 
 @media only screen and (max-width: 500px) {
     .card, .card-hold, .panel-card{
-        width: 50px;
+        width: 16%;
+    }
+
+    h1{
+        font-size: 24px;
     }
 }
